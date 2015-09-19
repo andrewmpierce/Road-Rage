@@ -91,7 +91,6 @@ class Sim:
         self.road = Road()
 
 
-
     def tick(self):
         road_data_sec = np.array(self.road.road_map)
         speed = self.road.check_cars()
@@ -99,19 +98,16 @@ class Sim:
         self.road.change_car_speed()
         self.road.drive()
         self.road.update_road_map()
-        return avg_speed
-        #return np.array(road_data_sec)
-
-
-    def reset(self):
-        return self.ticks == 0
+        return(avg_speed, road_data_sec)
 
 
     def run(self, num_ticks = 60):
         all_data = []
+        avg_speed_data = []
         self.road.place_cars_init()
         for tick in range(num_ticks):
-            all_data.append(self.tick())
+            all_data.append(self.tick()[1])
+            avg_speed_data.append(self.tick()[0])
             self.ticks += 1
-        #return np.array(all_data)
-        return(sum(all_data)/len(all_data))
+        avg_speed_data = sum(avg_speed_data)/len(avg_speed_data)
+        return(all_data, avg_speed_data)
