@@ -100,7 +100,7 @@ class Sim:
         self.road.change_car_speed()
         self.road.drive()
         self.road.update_road_map()
-        return road_data_sec
+        return np.array(road_data_sec)
 
 
     def reset(self):
@@ -113,4 +113,4 @@ class Sim:
         for tick in range(num_ticks):
             all_data.append(self.tick())
             self.ticks += 1
-        return all_data
+        return np.array(all_data)
