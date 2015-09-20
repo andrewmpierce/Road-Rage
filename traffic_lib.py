@@ -7,10 +7,10 @@ import numpy as np
 
 #All speed units will be in meters/sec
 class Car:
-    def __init__(self, size = 5, speed = 20, max_speed = 30, location = 0):
+    def __init__(self, size = 5, speed = 15, max_speed = 20, location = 0):
         self.size = size
         self.max_speed = max_speed
-        self.speed = abs(speed)
+        self.speed = speed
         self.location = location
 
 
@@ -110,4 +110,4 @@ class Sim:
             avg_speed_data.append(self.tick()[0])
             self.ticks += 1
         avg_speed_data = sum(avg_speed_data)/len(avg_speed_data)
-        return(all_data, avg_speed_data)
+        return(np.array(all_data), avg_speed_data)
