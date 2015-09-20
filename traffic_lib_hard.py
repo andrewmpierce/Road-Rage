@@ -50,12 +50,49 @@ class Car:
         return("I'm at {}, I'm going {} m/s, my slow down is {} ".format(self.location, self.speed, self.slow_down))
 
 
+class Aggressive(Car):
+    def __init__(self, size = 5, speed = 5, max_speed = 30, location = 0, accel = 5, init_slow = .05, slow_down = .05):
+        super().__init__(size, speed, max_speed, location, accel, init_slow, slow_down)
+        self.size = size
+        self.max_speed = max_speed
+        self.speed = speed
+        self.location = location
+        self.accel = accel
+        self.slow_down = slow_down
+        self.init_slow = init_slow
+        self.distance = self.speed
+
+
+class Commercial(Car):
+    def __init__(self, size = 25, speed = 5, max_speed = 30, location = 0, accel = 1.5, init_slow = .10, slow_down = .10):
+        super().__init__(size, speed, max_speed, location, accel, init_slow, slow_down)
+        self.size = size
+        self.max_speed = max_speed
+        self.speed = speed
+        self.location = location
+        self.accel = accel
+        self.slow_down = slow_down
+        self.init_slow = init_slow
+        self.distance = self.speed * 2
+
+
 
 class Road:
     def __init__(self):
-        self.cars = [Car() for x in range(150)]
+        self.cars = self.make_cars()
         self.road_map = np.array([0 for _ in range(7050)])
 
+
+    def make_cars(self):
+        cars = []
+        for x in range(150):
+            random = random.random()
+            if random <= .10:
+                cars.append(Aggressive())
+            elif random > .10 and random <= .25:
+                cars.append(Commercial())
+            else:
+                cars.append(Car())
 
     def place_cars_init(self):
         placement = 0
