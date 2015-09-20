@@ -7,10 +7,10 @@ import numpy as np
 
 #All speed units will be in meters/sec
 class Car:
-    def __init__(self, size = 5, speed = 5, max_speed = 30, location = 0, accel = 2, init_slow = .10, slow_down = .10):
+    def __init__(self, size = 5, speed = 5, max_speed = 15, location = 0, accel = 2, init_slow = .10, slow_down = .10):
         self.size = size
         self.max_speed = max_speed
-        self.speed = speed
+        self.speed = abs(speed)
         self.location = location
         self.accel = accel
         self.slow_down = slow_down
@@ -55,7 +55,7 @@ class Aggressive(Car):
         super().__init__(size, speed, max_speed, location, accel, init_slow, slow_down)
         self.size = size
         self.max_speed = max_speed
-        self.speed = speed
+        self.speed = abs(speed)
         self.location = location
         self.accel = accel
         self.slow_down = slow_down
@@ -64,16 +64,16 @@ class Aggressive(Car):
 
 
 class Commercial(Car):
-    def __init__(self, size = 25, speed = 5, max_speed = 30, location = 0, accel = 1.5, init_slow = .10, slow_down = .10):
+    def __init__(self, size = 25, speed = 5, max_speed = 20, location = 0, accel = 1.5, init_slow = .10, slow_down = .10):
         super().__init__(size, speed, max_speed, location, accel, init_slow, slow_down)
         self.size = size
         self.max_speed = max_speed
-        self.speed = speed
+        self.speed = abs(speed)
         self.location = location
         self.accel = accel
         self.slow_down = slow_down
         self.init_slow = init_slow
-        self.distance = self.speed * 2
+        self.distance = (self.speed * 2)
 
 
 
@@ -86,13 +86,14 @@ class Road:
     def make_cars(self):
         cars = []
         for x in range(150):
-            random = random.random()
-            if random <= .10:
-                cars.append(Aggressive())
-            elif random > .10 and random <= .25:
-                cars.append(Commercial())
+            random_pick = random.random()
+            if random_pick <= .10:
+                cars.append(Aggressive(Car))
+            elif random_pick > .10 and random_pick <= .25:
+                cars.append(Commercial(Car))
             else:
                 cars.append(Car())
+        return cars
 
     def place_cars_init(self):
         placement = 0
@@ -104,19 +105,27 @@ class Road:
     def update_road_map(self):
         self.road_map = np.array([0 for _ in range(7050)])
         for car in self.cars:
-            for x in range(car.size):
-                self.road_map[car.location+x] = 1
+            if car.size == 5:
+                for x in range(5):
+                    self.road_map[car.location+x] = 1
+            else:
+                for x in range(25):
+                    self.road_map[car.location+x] = 1
 
 
     def change_car_speed(self):
         idx = 0
         for car in self.cars:
             space = []
-            for x in self.road_map[(car.location + car.size):(car.location + car.size)+car.distance]:
-                space.append(x)
+            if car.size == 5:
+                for x in self.road_map[(car.location+5): (car.location+5) + car.distance]:
+                    space.append(x)
+            else:
+                for x in self.road_map[(car.location+25): (car.location+25) + car.distance]:
+                    space.append(x)
 
             if random.random() <= car.rough_road():
-                if car.speed > 0:
+                if car.speed > 2:
                     car.speed -= 2
 
             elif sum(space) == 0 and car.speed >= car.max_speed:
@@ -159,6 +168,7 @@ class Sim:
     def tick(self):
         road_data_sec = np.array(self.road.road_map)
         speed = self.road.speed_cars()
+        print(speed)
         avg_speed = sum(speed)/len(speed)
         self.road.change_car_speed()
         self.road.drive()
