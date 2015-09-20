@@ -7,7 +7,7 @@ import numpy as np
 
 #All speed units will be in meters/sec
 class Car:
-    def __init__(self, size = 5, speed = 5, max_speed = 25, location = 0, accel = 2, init_slow = .10, slow_down = .10):
+    def __init__(self, size = 5, speed = 5, max_speed = 30, location = 0, accel = 2, init_slow = .10, slow_down = .10):
         self.size = size
         self.max_speed = max_speed
         self.speed = speed
@@ -32,7 +32,7 @@ class Car:
         elif self.location >= 2000 and self.location < 2500:
             self.slow_down == self.init_slow
 
-        elif self.location >= 3000 and self.location < 3015:
+        elif self.location >= 3000 and self.location < 3030:
             self.slow_down = self.slow_down * 2
 
         elif self.location > 4000 and self.location < 4500:
