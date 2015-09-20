@@ -21,7 +21,7 @@ class Car:
         return self.location
 
     def check_loc(self):
-        return("I'm car {} and I'm at {}, I'm going {} m/s".format(self.car_id, self.location, self.speed))
+        return("I'm at {}, I'm going {} m/s".format(self.location, self.speed))
 
 
 
