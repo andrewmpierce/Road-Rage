@@ -51,7 +51,7 @@ class Car:
 
 
 class Aggressive(Car):
-    def __init__(self, size = 5, speed = 5, max_speed = 30, location = 0, accel = 5, init_slow = .05, slow_down = .05):
+    def __init__(self, size = 5, speed = 5, max_speed = 15, location = 0, accel = 5, init_slow = .05, slow_down = .05):
         super().__init__(size, speed, max_speed, location, accel, init_slow, slow_down)
         self.size = size
         self.max_speed = max_speed
@@ -64,7 +64,7 @@ class Aggressive(Car):
 
 
 class Commercial(Car):
-    def __init__(self, size = 25, speed = 5, max_speed = 20, location = 0, accel = 1.5, init_slow = .10, slow_down = .10):
+    def __init__(self, size = 25, speed = 5, max_speed = 15, location = 0, accel = 1.5, init_slow = .10, slow_down = .10):
         super().__init__(size, speed, max_speed, location, accel, init_slow, slow_down)
         self.size = size
         self.max_speed = max_speed
@@ -168,7 +168,6 @@ class Sim:
     def tick(self):
         road_data_sec = np.array(self.road.road_map)
         speed = self.road.speed_cars()
-        print(speed)
         avg_speed = sum(speed)/len(speed)
         self.road.change_car_speed()
         self.road.drive()
