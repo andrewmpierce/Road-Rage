@@ -7,7 +7,7 @@ import numpy as np
 
 #All speed units will be in meters/sec
 class Car:
-    def __init__(self, size = 5, speed = 5, max_speed = 15, location = 0, accel = 2, init_slow = .10, slow_down = .10):
+    def __init__(self, size = 5, speed = 5, max_speed = 17, location = 0, accel = 2, init_slow = .10, slow_down = .10):
         self.size = size
         self.max_speed = max_speed
         self.speed = abs(speed)
@@ -51,7 +51,7 @@ class Car:
 
 
 class Aggressive(Car):
-    def __init__(self, size = 5, speed = 5, max_speed = 15, location = 0, accel = 5, init_slow = .05, slow_down = .05):
+    def __init__(self, size = 5, speed = 5, max_speed = 17, location = 0, accel = 5, init_slow = .05, slow_down = .05):
         super().__init__(size, speed, max_speed, location, accel, init_slow, slow_down)
         self.size = size
         self.max_speed = max_speed
@@ -64,7 +64,7 @@ class Aggressive(Car):
 
 
 class Commercial(Car):
-    def __init__(self, size = 25, speed = 5, max_speed = 15, location = 0, accel = 1.5, init_slow = .10, slow_down = .10):
+    def __init__(self, size = 25, speed = 5, max_speed = 17, location = 0, accel = 1.5, init_slow = .10, slow_down = .10):
         super().__init__(size, speed, max_speed, location, accel, init_slow, slow_down)
         self.size = size
         self.max_speed = max_speed
