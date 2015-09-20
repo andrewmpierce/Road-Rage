@@ -7,7 +7,7 @@ import numpy as np
 
 #All speed units will be in meters/sec
 class Car:
-    def __init__(self, size = 5, speed = 15, max_speed = 20, location = 0):
+    def __init__(self, size = 5, speed = 15, max_speed = 17, location = 0):
         self.size = size
         self.max_speed = max_speed
         self.speed = speed
@@ -54,6 +54,9 @@ class Road:
             if random.random() <= .10:
                 if car.speed > 0:
                     car.speed -= 2
+
+            elif sum(space) == 0 and car.speed >= car.max_speed:
+                car.speed == car.max_speed
 
             elif sum(space) == 0 and car.speed <= car.max_speed:
                 car.speed += 2
