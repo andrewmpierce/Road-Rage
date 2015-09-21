@@ -7,7 +7,7 @@ import numpy as np
 
 #All speed units will be in meters/sec
 class Car:
-    def __init__(self, size = 5, speed = 5, max_speed = 10, location = 0, accel = 2, init_slow = .10, slow_down = .10):
+    def __init__(self, size = 5, speed = 2, max_speed = 2.8, location = 0, accel = 2, init_slow = .10, slow_down = .10):
         self.size = size
         self.max_speed = max_speed
         self.speed = abs(speed)
@@ -26,19 +26,19 @@ class Car:
 
 
     def rough_road(self):
-        if self.location >= 1000 and self.location < 1030:
+        if self.location >= 1000 and self.location < 1015:
             self.slow_down = self.slow_down * 1.4
 
         elif self.location >= 2000 and self.location < 2500:
             self.slow_down == self.init_slow
 
-        elif self.location >= 3000 and self.location < 3030:
+        elif self.location >= 3000 and self.location < 3015:
             self.slow_down = self.slow_down * 2
 
         elif self.location > 4000 and self.location < 4500:
             self.slow_down == self.init_slow
 
-        elif self.location >= 5000 and self.location < 5030:
+        elif self.location >= 5000 and self.location < 5015:
             self.slow_down = self.slow_down * 1.2
 
         elif self.location > 6000 and self. location < 6500:
@@ -51,7 +51,7 @@ class Car:
 
 
 class Aggressive(Car):
-    def __init__(self, size = 5, speed = 5, max_speed = 10, location = 0, accel = 5, init_slow = .05, slow_down = .05):
+    def __init__(self, size = 5, speed = 2, max_speed = 2.8, location = 0, accel = 5, init_slow = .05, slow_down = .05):
         super().__init__(size, speed, max_speed, location, accel, init_slow, slow_down)
         self.size = size
         self.max_speed = max_speed
@@ -64,7 +64,7 @@ class Aggressive(Car):
 
 
 class Commercial(Car):
-    def __init__(self, size = 25, speed = 5, max_speed = 10, location = 0, accel = 1.5, init_slow = .10, slow_down = .10):
+    def __init__(self, size = 25, speed = 2, max_speed = 2.8, location = 0, accel = 1.5, init_slow = .10, slow_down = .10):
         super().__init__(size, speed, max_speed, location, accel, init_slow, slow_down)
         self.size = size
         self.max_speed = max_speed
